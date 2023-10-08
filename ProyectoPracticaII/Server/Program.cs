@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using ProyectoPracticaII.Client.Models;
+using Microsoft.EntityFrameworkCore; 
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<Motored01Context>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
+});
 
 var app = builder.Build();
 
