@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ProyectoPracticaII.Client.Models.Usuario>
+﻿@using ProyectoPracticaII.Client.Pages;
+@model IEnumerable<ProyectoPracticaII.Client.Models.Usuario>
 
 @{
     ViewData["Title"] = "Index";
@@ -45,3 +46,7 @@
 }
     </tbody>
 </table>
+
+
+    @(await Html.RenderComponentAsync<Usuario>(RenderMode.Server)); 
+

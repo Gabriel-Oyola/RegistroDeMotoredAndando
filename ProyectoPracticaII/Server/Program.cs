@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<Motored01Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
@@ -39,5 +40,6 @@ app.UseRouting();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+app.MapBlazorHub(); 
 
 app.Run();
