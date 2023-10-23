@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using ProyectoPracticaII.Client.Models;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+
+using ProyectoPracticaII.Client.Contrato;
+using ProyectoPracticaII.Client.Implementacion;
+
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +21,16 @@ builder.Services.AddDbContext<Motored01Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
 });
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Inicio/IniciarSesion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
+
 
 var app = builder.Build();
 
@@ -35,6 +52,11 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+
+
+
 
 
 app.MapRazorPages();
