@@ -1,17 +1,16 @@
-﻿@page "/Registro"
+﻿@page "/Login"
 @using ProyectoPracticaII.Client.Models;
 @inject HttpClient http
 @inject IHttpService Ihttp
 @inject NavigationManager NavigatorManager
 
 <EditForm Model="NuevoUsuario">
-    <label>Nombre</label>
-   <InputText @bind-Value=NuevoUsuario.NombreUsuario></InputText>
+ 
     <label>Correo</label>
     <InputText @bind-Value=NuevoUsuario.Correo></InputText>
     <label>Clave</label>
     <InputText @bind-Value=NuevoUsuario.Clave></InputText>
-  
+
 
 
     <button @onclick="(()=>CrearUsuario(NuevoUsuario))">Crear Usuario</button>
@@ -22,12 +21,12 @@
 </EditForm>
 
 @code {
-    
-    Usuario NuevoUsuario = new Usuario(); 
+
+    Usuario NuevoUsuario = new Usuario();
 
     public async Task CrearUsuario(Usuario usuario)
     {
-        var resultado = await Ihttp.Post<Usuario>("api/LoginAndRegister/Registro", NuevoUsuario);
+        var resultado = await Ihttp.Post<Usuario>("api/LoginAndRegister/Login", NuevoUsuario);
         if (resultado.Error)
         {
             var body = resultado.HttpResponseMessage;
@@ -36,6 +35,6 @@
         NavigatorManager.NavigateTo("/");
     }
 
-    
+
 
 }

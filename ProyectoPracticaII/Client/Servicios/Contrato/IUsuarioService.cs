@@ -8,7 +8,7 @@ namespace ProyectoPracticaII.Client.Contrato
     {
 
         Task<Usuario> GetUsuario(string correo, string clave);
+        Task<Usuario> Post(Usuario modelo);
 
-        Task<Usuario> SaveUsuario(Usuario modelo);
     }
 }

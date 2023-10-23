@@ -27,20 +27,20 @@ namespace ProyectoPracticaII.Server.Controllers
         }
 
 
-        [HttpPost]
+        //[HttpPost]
 
-        public async Task<IActionResult> Registrarse(Usuario modelo)
-        {
-            modelo.Clave = Utilidades.EncriptarClave(modelo.Clave);
+        //public async Task<IActionResult> Registrarse(Usuario modelo)
+        //{
+        //    modelo.Clave = Utilidades.EncriptarClave(modelo.Clave);
 
-            Usuario usuario_creado = await _usuarioService.SaveUsuario(modelo);
+        //    Usuario usuario_creado = await _usuarioService.SaveUsuario(modelo);
 
-            if (usuario_creado.IdUsuario > 0)
-                return RedirectToAction("IniciarSesion", "Inicio");
+        //    if (usuario_creado.IdUsuario > 0)
+        //        return RedirectToAction("IniciarSesion", "Inicio");
 
-            ViewData["Mensaje"] = "No se pudo crear el usuario";
-            return View();
-        }
+        //    ViewData["Mensaje"] = "No se pudo crear el usuario";
+        //    return View();
+        //}
 
         public IActionResult IniciarSesion()
         {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ProyectoPracticaII.Client.Models;
 using ProyectoPracticaII.Client.Contrato;
+using ProyectoPracticaII.Client.Servicios;
 
 namespace ProyectoPracticaII.Client.Implementacion
 {
@@ -22,7 +23,7 @@ namespace ProyectoPracticaII.Client.Implementacion
             return usuario_encontrado;
         }
 
-        public async Task<Usuario> SaveUsuario(Usuario modelo)
+        public async Task<Usuario> Post(Usuario modelo)
         {
           _dbContext.Usuarios.Add(modelo);
             await _dbContext.SaveChangesAsync();

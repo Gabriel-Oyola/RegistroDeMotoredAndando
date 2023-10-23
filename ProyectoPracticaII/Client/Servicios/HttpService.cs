@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 
 namespace ProyectoPracticaII.Client.Servicios
 {
@@ -30,6 +31,22 @@ namespace ProyectoPracticaII.Client.Servicios
         {
             var respuestaStr = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(respuestaStr, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+        public async Task<HttpRepuesta<object>> Post<T>(string url, T enviar)
+        {
+            try
+            {
+                var enviarJson = JsonSerializer.Serialize(enviar);
+                var enviarContent = new StringContent(enviarJson,
+                                                      Encoding.UTF8,
+                                                      "application/json");
+                var respuesta = await http.PostAsync(url, enviarContent);
+                return new HttpRepuesta<object>(null,
+                                                 !respuesta.IsSuccessStatusCode,
+                                                 respuesta);
+            }
+            catch (Exception e) { throw; }
+
         }
     }
 }
